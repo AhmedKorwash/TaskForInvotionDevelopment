@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+<div class="row">
+    <h2>Student List</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Age</th>
+                <th>No.Subject</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+        foreach (var stu in ViewData["StudentList"] as List<Student.Mangmnet.Models.StudentModels>)
+        {
+            <tr>
+                <td>
+                    <span ><a class="label label-primary" href="/Student/Edite/@stu.StudentId">@stu.Name</a></span>
+                    
+                </td>
+                <td>
+                    <span class="label label-info">@stu.Age</span>
+                </td>
+                <td>
+                    <span class="label label-info">@stu.Subjects.Count</span>
+                </td>
+                <td>
+                    @using (Html.BeginForm("Delete", "Student", new { id = @stu.StudentId }, FormMethod.Post))
+                     {
+                     @Html.AntiForgeryToken()
+
+                     <input class="btn btn-danger -- alert-info" type="submit" value="Delete"> <span></span>
+                     }
+                </td>
+            </tr>
+}
+            }
+
+        </tbody>
+    </table>
+</div>
